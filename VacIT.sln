@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacIT", "VacIT\VacIT.csproj", "{EE4B8EB7-821A-4E90-BCDA-EC4E8ECFBBB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE4B8EB7-821A-4E90-BCDA-EC4E8ECFBBB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4B8EB7-821A-4E90-BCDA-EC4E8ECFBBB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4B8EB7-821A-4E90-BCDA-EC4E8ECFBBB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4B8EB7-821A-4E90-BCDA-EC4E8ECFBBB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C71D654-0E8F-4FF5-AA7A-CFA9D1B35CE4}
+	EndGlobalSection
+EndGlobal
