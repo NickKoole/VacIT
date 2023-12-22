@@ -1,0 +1,98 @@
+Websitepagina's en functionaliteit
+
+Niet-ingelogde gebruiker navmenu:
+ - Registreren
+ - Inloggen
+
+Ingelogde kandidaat navmenu:
+ - mijn profiel
+ - mijn sollicitaties
+ - uitloggen
+
+Ingelogde werkgever navmenu:
+ - mijn openstaande vacatures
+ - mijn afspraken
+ - mijn kandidaten
+ - uitloggen
+
+Ingelogde admin navmenu:
+ - openstaande vacatures
+ - kandidaten
+ - werkgevers
+ - kandidaat- en werkgeverreacties
+ - afspraken
+ - uitloggen
+
+
+Algemene pagina:
+HomeView functies:
+ - toon laatste 3 vacatures
+
+
+Kandidaatpagina's:
+VacaturesView functies:
+ - direct solliciteren
+
+MijnSollicitatiesView:
+ - toon sollicitatietitel, bedrijf en ingestuurde motivatie
+ - pas motivatie aan
+ - verwijder sollicitatie
+
+
+Werkgeverpagina's:
+MijnVacaturesView:
+ - toon openstaande vacatures
+ - creëer nieuwe vacature
+
+MijnAfsprakenView:
+ - toon per openstaande vacature geïnteresseerde kandidaten
+ - klikken op kandidaat toont AfspraakView
+
+AfspraakView
+ - toon voornaam kandidaat
+ - toon achternaam kandidaat
+ - klikken op voornaam/achternaam toont KandidaatView
+ - toon motivatie
+ - toon interesseknop
+
+
+Werkgever/kandidaatpagina's:
+KandidaatProfielView:
+ - toon kandidaatgegevens
+Kandidaat functionaliteit:
+ - pas kandidaatgegevens aan
+Werkgever functionaliteit:
+ - download cv (pdf file)
+
+WerkgeverProfielView:
+ - toon werkgevergegevens
+Werkgever functionaliteit:
+ - pas werkgevergegevens aan
+
+VacatureView:
+ - toon vacaturegegevens
+Werkgever functionaliteit:
+ - pas openstaande vacature aan
+ - verwijder vacature
+
+
+Adminpagina's:
+Alle functionaliteit op de volgende pagina's:
+KandidaatProfielView
+WerkgeverProfielView
+VacatureView
+AfspraakView
+
+Toegang tot:
+VacaturesView:
+ - toon alle vacatures
+ - klikken op vacature toont VacatureView
+KandidatenView:
+ - toon alle kandidaten
+ - klikken op kandidaat toont KandidaatProfielView
+WerkgeversView:
+ - toon alle werkgevers
+ - klikken op werkgever toont WerkgeverProfielView
+AfsprakenView
+ - toon alle afspraken
+ - klikken op afspraak toont AfspraakView
