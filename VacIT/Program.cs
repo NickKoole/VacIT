@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VacIT.Areas.Identity.Data;
 using VacIT.Data;
+using VacIT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("VacITContextConnection") ?? throw new InvalidOperationException("Connection string 'VacITContextConnection' not found.");
@@ -72,5 +73,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+
+await SeedDB.Initialize(app);
 
 app.Run();
