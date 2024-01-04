@@ -42,7 +42,6 @@ namespace VacIT.Models
                         var user = new VacITUser();
                         user.UserName = email;
                         user.Email = email;
-                        user.Password = password;
                         user.FirstName = firstName;
                         user.LastName = lastName;
                         user.Address = address;
@@ -51,7 +50,7 @@ namespace VacIT.Models
 
                         await userManager.CreateAsync(user, password);
 
-                        await userManager.AddToRoleAsync(user, roles[0]);
+                        await userManager.AddToRoleAsync(user, roles[i]);
                         i++;
                     }
                 }
