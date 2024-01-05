@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VacIT.Models;
 
@@ -11,9 +12,11 @@ using VacIT.Models;
 namespace VacIT.Migrations
 {
     [DbContext(typeof(VacITContext))]
-    partial class VacITContextModelSnapshot : ModelSnapshot
+    [Migration("20240105133103_AddedApplicationAndJobOfferModels")]
+    partial class AddedApplicationAndJobOfferModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
