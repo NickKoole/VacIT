@@ -12,7 +12,7 @@ namespace VacIT.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "JobOffer",
+                name: "JobOffers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -30,7 +30,7 @@ namespace VacIT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Application",
+                name: "Applications",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -51,19 +51,19 @@ namespace VacIT.Migrations
                     table.ForeignKey(
                         name: "FK_Application_JobOffer_JobOfferId",
                         column: x => x.JobOfferId,
-                        principalTable: "JobOffer",
+                        principalTable: "JobOffers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Application_JobOfferId",
-                table: "Application",
+                table: "Applications",
                 column: "JobOfferId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Application_VacItUserId",
-                table: "Application",
+                table: "Applications",
                 column: "VacItUserId");
         }
 
@@ -71,10 +71,10 @@ namespace VacIT.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Application");
+                name: "Applications");
 
             migrationBuilder.DropTable(
-                name: "JobOffer");
+                name: "JobOffers");
         }
     }
 }
