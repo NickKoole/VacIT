@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using VacIT.Areas.Identity.Data;
+using VacIT.Models;
 
 namespace VacIT.Areas.Identity.Pages.Account
 {

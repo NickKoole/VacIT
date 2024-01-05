@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VacIT.Areas.Identity.Data;
 
-namespace VacIT.Data;
+namespace VacIT.Models;
 
-public class VacITContext : IdentityDbContext<VacITUser>
+public class VacITContext : IdentityDbContext<VacITUser, IdentityRole<int>, int>
 {
     public VacITContext(DbContextOptions<VacITContext> options)
         : base(options)

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using VacIT.Areas.Identity.Data;
-using VacIT.Data;
 
 namespace VacIT.Models
 {
@@ -10,14 +8,14 @@ namespace VacIT.Models
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
                 var roles = new[] { "Admin", "Employer", "Candidate" };
 
                 foreach (var role in roles)
                 {
                     if (!await roleManager.RoleExistsAsync(role))
-                        await roleManager.CreateAsync(new IdentityRole(role));
+                        await roleManager.CreateAsync(new IdentityRole<int>(role));
                 }
             }
 

@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using VacIT.Areas.Identity.Data;
-using VacIT.Data;
 using VacIT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("VacITContextCo
 builder.Services.AddDbContext<VacITContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<VacITUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
+    .AddRoles<IdentityRole<int>>()
     .AddEntityFrameworkStores<VacITContext>();
 
 // Add services to the container.
