@@ -30,8 +30,11 @@ public class VacITUser : IdentityUser<int>
     [Column(TypeName = "nvarchar(20)")]
     public string City { get; set; }
 
-    //Many to one relatie met Application wordt in de volgende regel aangemaakt
-    public ICollection<Application> Applications { get; set; } = new List<Application>();
+    //One to many relatie met Application wordt in de volgende regel aangemaakt
+    public ICollection<Application>? Applications { get; set; } = new List<Application>();
+
+    //One to many relatie met JobOffer wordt in de volgende regel aangemaakt
+    public ICollection<JobOffer>? JobOffers { get; set; } = new List<JobOffer>();
 
     //public string CvPdfFileLocation { get; set; }
 }

@@ -23,12 +23,15 @@ namespace VacIT.Models
 
         public DateOnly DateOfPublication { get; set; }
 
-        //Many to one relatie met Application wordt in de volgende regel aangemaakt
-        public ICollection<Application> Applications { get; set; } = new List<Application>();
+        //One to many relatie met Application wordt in de volgende regel aangemaakt
+        public ICollection<Application>? Applications { get; set; } = new List<Application>();
 
-        public JobOffer(int id, string name, string title, string description, string level, string city, DateOnly dateOfPublication)
+        //Many to one relatie met VacITUser wordt hieronder aangemaakt
+        public int VacITUserId { get; set; }
+        public VacITUser VacITUser { get; set; } = null!;
+
+        public JobOffer(string name, string title, string description, string level, string city, DateOnly dateOfPublication)
         {
-            Id = id;
             Name = name;
             Title = title;
             Description = description;

@@ -22,11 +22,18 @@ namespace VacIT.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Level = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    DateOfPublication = table.Column<DateOnly>(type: "date", nullable: false)
+                    DateOfPublication = table.Column<DateOnly>(type: "date", nullable: false),
+                    VacITUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobOffer", x => x.Id);
+                    table.PrimaryKey("PK_JobOffers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobOffers_AspNetUsers_VacITUserId",
+                        column: x => x.VacITUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,30 +48,35 @@ namespace VacIT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Application", x => x.Id);
+                    table.PrimaryKey("PK_Applications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Application_AspNetUsers_VacItUserId",
+                        name: "FK_Applications_AspNetUsers_VacItUserId",
                         column: x => x.VacItUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Application_JobOffer_JobOfferId",
+                        name: "FK_Applications_JobOffers_JobOfferId",
                         column: x => x.JobOfferId,
                         principalTable: "JobOffers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Application_JobOfferId",
+                name: "IX_Applications_JobOfferId",
                 table: "Applications",
                 column: "JobOfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Application_VacItUserId",
+                name: "IX_Applications_VacItUserId",
                 table: "Applications",
                 column: "VacItUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobOffers_VacITUserId",
+                table: "JobOffers",
+                column: "VacITUserId");
         }
 
         /// <inheritdoc />

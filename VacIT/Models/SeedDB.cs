@@ -53,6 +53,35 @@ namespace VacIT.Models
                     }
                 }
             }
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<VacITContext>();
+
+                if (!dbContext.JobOffers.Any())
+                {
+                    DateOnly date = new DateOnly(2024, 1, 1);
+                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Testlevel", "Teststad", date);
+                    dbContext.JobOffers.Add(jobOffer);
+                    await dbContext.SaveChangesAsync();
+
+                    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<VacITUser>>();
+
+                }
+            }
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<VacITContext>();
+
+                if (!dbContext.JobOffers.Any())
+                {
+                    DateOnly date = new DateOnly(2024, 1, 1);
+                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Testlevel", "Teststad", date);
+                    dbContext.JobOffers.Add(jobOffer);
+                    await dbContext.SaveChangesAsync();
+                }
+            }
         }
     }
 }

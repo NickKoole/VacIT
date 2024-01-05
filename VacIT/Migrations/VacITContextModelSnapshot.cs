@@ -183,7 +183,7 @@ namespace VacIT.Migrations
 
                     b.HasIndex("VacItUserId");
 
-                    b.ToTable("Application");
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
@@ -217,9 +217,14 @@ namespace VacIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int>("VacITUserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("JobOffer");
+                    b.HasIndex("VacITUserId");
+
+                    b.ToTable("JobOffers");
                 });
 
             modelBuilder.Entity("VacIT.Models.VacITUser", b =>
@@ -382,12 +387,25 @@ namespace VacIT.Migrations
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
                 {
+                    b.HasOne("VacIT.Models.VacITUser", "VacITUser")
+                        .WithMany("JobOffers")
+                        .HasForeignKey("VacITUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VacITUser");
+                });
+
+            modelBuilder.Entity("VacIT.Models.JobOffer", b =>
+                {
                     b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("VacIT.Models.VacITUser", b =>
                 {
                     b.Navigation("Applications");
+
+                    b.Navigation("JobOffers");
                 });
 #pragma warning restore 612, 618
         }
