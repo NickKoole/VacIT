@@ -1,18 +1,6 @@
 ﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-:root {
-    /* FONTS */
-    --titles: "bebas-neue";
-    --headings: "roboto-condensed";
-    --regular: "Arial";
-    /* COLORS */
-    --gray: #333333;
-    --orange: #F15A24;
-    --white: #FFF;
-    --black: #000;
-}
-
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -60,5 +48,5 @@ button.accept-policy {
 }
 
 .navbar-custom {
-    background-color: #000;
+    background-color: var(--black);
 }
