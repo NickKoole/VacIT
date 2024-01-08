@@ -9,6 +9,8 @@ namespace VacIT.Models
         [Column(TypeName = "nvarchar(max)")]
         public string Motivation {  get; set; }
 
+        public bool Invited { get; set; } = false;
+
         //Many to one relatie wordt hieronder aangemaakt met een VacITCandidate
         public int VacItCandidateId { get; set; }
         public VacITCandidate VacITCandidate { get; set; } = null!;
