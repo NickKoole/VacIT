@@ -23,37 +23,27 @@ namespace VacIT.Models
             {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<VacITUser>>();
 
-                string[] emails = { "admin@admin.admin", "employer@employer.employer", "candidate@candidate.candidate" };
+                VacITUser[] users = {   new VacITUser("admin@admin.admin", "Teststraat 1", "1234AB", "Admindam"),
+                                        new VacITEmployer("employer@employer.employer", "Testwerkgever", "Teststraat 1", "1234AB", "Testplaats"),
+                                        new VacITCandidate("candidate@candidate.candidate", "Testvoornaam", "Testachternaan", "Teststraat 2", "1234AB", "Testplaats")
+                                    };
                 string password = "Test890!";
-                string firstName = "Test";
-                string lastName = "Test";
-                string address = "Teststraat 1";
-                string zipcode = "1234AB";
-                string city = "Admindam";
                 string[] roles = { "Admin", "Employer", "Candidate" };
+
+
                 int i = 0;
-
-                foreach (string email in emails)
+                foreach (VacITUser user in users)
                 {
-                    if (await userManager.FindByEmailAsync(email) == null)
+                    if (await userManager.FindByEmailAsync(user.Email) == null)
                     {
-                        var user = new VacITUser();
-                        user.UserName = email;
-                        user.Email = email;
-                        user.FirstName = firstName;
-                        user.LastName = lastName;
-                        user.Address = address;
-                        user.Zipcode = zipcode;
-                        user.City = city;
-
                         await userManager.CreateAsync(user, password);
-
                         await userManager.AddToRoleAsync(user, roles[i]);
-                        i++;
                     }
+                    i++;
                 }
             }
 
+            /*
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<VacITContext>();
@@ -61,7 +51,7 @@ namespace VacIT.Models
                 if (!dbContext.JobOffers.Any())
                 {
                     DateOnly date = new DateOnly(2024, 1, 1);
-                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Testlevel", "Teststad", date);
+                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Windows", "Testlevel", "Teststad", date);
                     dbContext.JobOffers.Add(jobOffer);
                     await dbContext.SaveChangesAsync();
 
@@ -69,7 +59,9 @@ namespace VacIT.Models
 
                 }
             }
+            */
 
+            /*
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<VacITContext>();
@@ -77,11 +69,12 @@ namespace VacIT.Models
                 if (!dbContext.JobOffers.Any())
                 {
                     DateOnly date = new DateOnly(2024, 1, 1);
-                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Testlevel", "Teststad", date);
+                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Windows", "Testlevel", "Teststad", date);
                     dbContext.JobOffers.Add(jobOffer);
                     await dbContext.SaveChangesAsync();
                 }
             }
+            */
         }
     }
 }

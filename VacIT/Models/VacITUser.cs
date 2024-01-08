@@ -11,14 +11,6 @@ namespace VacIT.Models;
 public class VacITUser : IdentityUser<int>
 {
     [PersonalData]
-    [Column(TypeName = "nvarchar(20)")]
-    public string FirstName { get; set; }
-
-    [PersonalData]
-    [Column(TypeName = "nvarchar(20)")]
-    public string LastName { get; set; }
-
-    [PersonalData]
     [Column(TypeName = "nvarchar(40)")]
     public string Address { get; set; }
 
@@ -30,12 +22,18 @@ public class VacITUser : IdentityUser<int>
     [Column(TypeName = "nvarchar(20)")]
     public string City { get; set; }
 
-    //One to many relatie met Application wordt in de volgende regel aangemaakt
-    public ICollection<Application>? Applications { get; set; } = new List<Application>();
+    public VacITUser()
+    {
 
-    //One to many relatie met JobOffer wordt in de volgende regel aangemaakt
-    public ICollection<JobOffer>? JobOffers { get; set; } = new List<JobOffer>();
+    }
 
-    //public string CvPdfFileLocation { get; set; }
+    public VacITUser(string email, string address, string zipcode, string city)
+    {
+        UserName = email;
+        Email = email;
+        Address = address;
+        Zipcode = zipcode;
+        City = city;
+    }
 }
 

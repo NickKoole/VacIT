@@ -12,8 +12,8 @@ using VacIT.Models;
 namespace VacIT.Migrations
 {
     [DbContext(typeof(VacITContext))]
-    [Migration("20240105150529_AddedApplicationAndJobOfferModels")]
-    partial class AddedApplicationAndJobOfferModels
+    [Migration("20240108104042_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,14 +177,14 @@ namespace VacIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VacItUserId")
+                    b.Property<int>("VacItCandidateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("JobOfferId");
 
-                    b.HasIndex("VacItUserId");
+                    b.HasIndex("VacItCandidateId");
 
                     b.ToTable("Applications");
                 });
@@ -216,16 +216,20 @@ namespace VacIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("Technology")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("VacITUserId")
+                    b.Property<int>("VacITEmployerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VacITUserId");
+                    b.HasIndex("VacITEmployerId");
 
                     b.ToTable("JobOffers");
                 });
@@ -253,20 +257,17 @@ namespace VacIT.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -316,6 +317,36 @@ namespace VacIT.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("VacITUser");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("VacIT.Models.VacITCandidate", b =>
+                {
+                    b.HasBaseType("VacIT.Models.VacITUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasDiscriminator().HasValue("VacITCandidate");
+                });
+
+            modelBuilder.Entity("VacIT.Models.VacITEmployer", b =>
+                {
+                    b.HasBaseType("VacIT.Models.VacITUser");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasDiscriminator().HasValue("VacITEmployer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -377,26 +408,26 @@ namespace VacIT.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VacIT.Models.VacITUser", "VacITUser")
+                    b.HasOne("VacIT.Models.VacITCandidate", "VacITCandidate")
                         .WithMany("Applications")
-                        .HasForeignKey("VacItUserId")
+                        .HasForeignKey("VacItCandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("JobOffer");
 
-                    b.Navigation("VacITUser");
+                    b.Navigation("VacITCandidate");
                 });
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
                 {
-                    b.HasOne("VacIT.Models.VacITUser", "VacITUser")
+                    b.HasOne("VacIT.Models.VacITEmployer", "VacITEmployer")
                         .WithMany("JobOffers")
-                        .HasForeignKey("VacITUserId")
+                        .HasForeignKey("VacITEmployerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("VacITUser");
+                    b.Navigation("VacITEmployer");
                 });
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
@@ -404,10 +435,13 @@ namespace VacIT.Migrations
                     b.Navigation("Applications");
                 });
 
-            modelBuilder.Entity("VacIT.Models.VacITUser", b =>
+            modelBuilder.Entity("VacIT.Models.VacITCandidate", b =>
                 {
                     b.Navigation("Applications");
+                });
 
+            modelBuilder.Entity("VacIT.Models.VacITEmployer", b =>
+                {
                     b.Navigation("JobOffers");
                 });
 #pragma warning restore 612, 618

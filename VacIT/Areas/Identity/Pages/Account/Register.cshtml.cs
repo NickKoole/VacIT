@@ -190,16 +190,16 @@ namespace VacIT.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private VacITUser CreateUser()
+        private VacITCandidate CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<VacITUser>();
+                return Activator.CreateInstance<VacITCandidate>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(VacITUser)}'. " +
-                    $"Ensure that '{nameof(VacITUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(VacITCandidate)}'. " +
+                    $"Ensure that '{nameof(VacITCandidate)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }

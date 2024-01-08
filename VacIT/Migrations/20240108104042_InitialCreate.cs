@@ -32,11 +32,13 @@ namespace VacIT.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(40)", nullable: false),
                     Zipcode = table.Column<string>(type: "nvarchar(10)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(20)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(30)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -163,6 +165,69 @@ namespace VacIT.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JobOffers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Technology = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    Level = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(20)", nullable: false),
+                    DateOfPublication = table.Column<DateOnly>(type: "date", nullable: false),
+                    VacITEmployerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobOffers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobOffers_AspNetUsers_VacITEmployerId",
+                        column: x => x.VacITEmployerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Applications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Motivation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VacItCandidateId = table.Column<int>(type: "int", nullable: false),
+                    JobOfferId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Applications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Applications_AspNetUsers_VacItCandidateId",
+                        column: x => x.VacItCandidateId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Applications_JobOffers_JobOfferId",
+                        column: x => x.JobOfferId,
+                        principalTable: "JobOffers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_JobOfferId",
+                table: "Applications",
+                column: "JobOfferId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_VacItCandidateId",
+                table: "Applications",
+                column: "VacItCandidateId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -201,11 +266,19 @@ namespace VacIT.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobOffers_VacITEmployerId",
+                table: "JobOffers",
+                column: "VacITEmployerId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Applications");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -220,6 +293,9 @@ namespace VacIT.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "JobOffers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
