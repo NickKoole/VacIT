@@ -27,7 +27,7 @@ namespace VacIT.Models
         public DateOnly DateOfPublication { get; set; }
 
         //One to many relatie met Application wordt in de volgende regel aangemaakt
-        public ICollection<Application>? Applications { get; set; } = new List<Application>();
+        public ICollection<CandidateApplication>? Applications { get; set; } = new List<CandidateApplication>();
 
         //Many to one relatie met VacITEmployer wordt hieronder aangemaakt
         public int VacITEmployerId { get; set; }

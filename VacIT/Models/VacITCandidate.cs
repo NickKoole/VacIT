@@ -17,7 +17,7 @@ namespace VacIT.Models
 
         //One to many relatie met Application wordt in de volgende regel aangemaakt
         [PersonalData]
-        public ICollection<Application>? Applications { get; set; } = new List<Application>();
+        public ICollection<CandidateApplication>? Applications { get; set; } = new List<CandidateApplication>();
 
         //public string CvPdfFileLocation { get; set; }
 

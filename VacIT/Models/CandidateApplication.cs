@@ -2,7 +2,7 @@
 
 namespace VacIT.Models
 {
-    public class Application
+    public class CandidateApplication
     {
         public int Id { get; set; }
 
