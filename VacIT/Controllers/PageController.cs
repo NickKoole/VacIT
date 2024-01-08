@@ -4,16 +4,21 @@ using VacIT.Models;
 
 namespace VacIT.Controllers
 {
-    public class HomeController : Controller
+    public class PageController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PageController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Sollicitaties()
         {
             return View();
         }
