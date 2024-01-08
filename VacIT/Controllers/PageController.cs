@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VacIT.Cruds;
 using VacIT.Models;
 
 namespace VacIT.Controllers
@@ -7,10 +8,12 @@ namespace VacIT.Controllers
     public class PageController : Controller
     {
         private readonly ILogger<PageController> _logger;
+        private CandidateApplicationCrud CandidateApplicationCrud;
 
         public PageController(ILogger<PageController> logger)
         {
             _logger = logger;
+            CandidateApplicationCrud = new CandidateApplicationCrud();
         }
 
         public IActionResult Index()
@@ -20,6 +23,7 @@ namespace VacIT.Controllers
 
         public IActionResult Sollicitaties()
         {
+            CandidateApplication candidateApplication = new CandidateApplication();
             return View();
         }
 

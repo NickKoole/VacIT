@@ -18,5 +18,21 @@ namespace VacIT.Models
         //Many to one relatie wordt hieronder aangemaakt met een JobOffer
         public int JobOfferId { get; set; }
         public JobOffer JobOffer { get; set; } = null!;
+
+        public CandidateApplication()
+        {
+
+        }
+
+        public CandidateApplication(int id, string motivation, bool invited, int vacItCandidateId, VacITCandidate vacITCandidate, int jobOfferId, JobOffer jobOffer)
+        {
+            Id = id;
+            Motivation = motivation;
+            Invited = invited;
+            VacItCandidateId = vacItCandidateId;
+            VacITCandidate = vacITCandidate;
+            JobOfferId = jobOfferId;
+            JobOffer = jobOffer;
+        }
     }
 }

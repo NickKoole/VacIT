@@ -72,7 +72,6 @@ app.MapControllerRoute(
     pattern: "{controller=Page}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-
 await SeedDB.Initialize(app);
 
 app.Run();
