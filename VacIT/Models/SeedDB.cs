@@ -30,7 +30,6 @@ namespace VacIT.Models
                 string password = "Test890!";
                 string[] roles = { "Admin", "Employer", "Candidate" };
 
-
                 int i = 0;
                 foreach (VacITUser user in users)
                 {

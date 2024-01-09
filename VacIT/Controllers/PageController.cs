@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VacIT.Cruds;
@@ -8,12 +9,13 @@ namespace VacIT.Controllers
     public class PageController : Controller
     {
         private readonly ILogger<PageController> _logger;
-        private CandidateApplicationCrud CandidateApplicationCrud;
+        private VacITPageModel _vacITPageModel;
 
-        public PageController(ILogger<PageController> logger)
+        public PageController(ILogger<PageController> logger, VacITContext context)
         {
             _logger = logger;
-            CandidateApplicationCrud = new CandidateApplicationCrud();
+            CandidateApplicationCrud candidateApplicationCrud = new CandidateApplicationCrud(context);
+            _vacITPageModel = new VacITPageModel(candidateApplicationCrud);
         }
 
         public IActionResult Index()
@@ -21,13 +23,24 @@ namespace VacIT.Controllers
             return View();
         }
 
-        public IActionResult Sollicitaties()
+        [Authorize(Roles = "Admin, Candidate")]
+        public IActionResult MijnSollicitaties()
         {
-            CandidateApplication candidateApplication = new CandidateApplication();
+            return View();
+        }
+
+        [Authorize(Roles = "Admin, Employer")]
+        public IActionResult MijnVacatures()
+        {
             return View();
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Vacatures()
         {
             return View();
         }

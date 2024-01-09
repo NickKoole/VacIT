@@ -4,19 +4,19 @@ namespace VacIT.Cruds
 {
     public class CandidateApplicationCrud
     {
-        private VacITContext Context;
+        private VacITContext _context;
 
         public CandidateApplicationCrud(VacITContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         public void CreateCandidateApplication(CandidateApplication application)
         {
             try
             {
-                Context.Applications.Add(application);
-                Context.SaveChanges();
+                _context.Applications.Add(application);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -28,13 +28,13 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedApplication = Context.Applications
+                var selectedApplication = _context.Applications
                     .Where(application => application.Id == id)
                     .FirstOrDefault();
 
                 if (selectedApplication != null)
                 {
-                    Context.Applications.Remove(selectedApplication);
+                    _context.Applications.Remove(selectedApplication);
                 }
             }
             catch (Exception e)
@@ -47,7 +47,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedApplication = Context.Applications
+                var selectedApplication = _context.Applications
                     .Where(application => application.Id == id)
                     .FirstOrDefault();
                 return selectedApplication;
@@ -63,7 +63,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var candidateApplications = Context.Applications.ToList();
+                var candidateApplications = _context.Applications.ToList();
                 return candidateApplications;
             }
             catch (Exception e)
@@ -77,7 +77,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var candidateApplications = Context.Applications
+                var candidateApplications = _context.Applications
                     .Where(candidateApplication => candidateApplication.VacItCandidateId == vacITCandidateId)
                     .ToList();
                 return candidateApplications;
@@ -93,8 +93,8 @@ namespace VacIT.Cruds
         {
             try
             {
-                Context.Applications.Update(application);
-                Context.SaveChanges();
+                _context.Applications.Update(application);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {

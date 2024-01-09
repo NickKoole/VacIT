@@ -4,18 +4,18 @@ namespace VacIT.Cruds
 {
     public class JobOfferCrud
     {
-        private VacITContext Context;
+        private VacITContext _context;
 
         public JobOfferCrud(VacITContext context)
         {
-            Context = context;
+            _context = context;
         }
         public void CreateJobOffer(JobOffer jobOffer)
         {
             try
             {
-                Context.JobOffers.Add(jobOffer);
-                Context.SaveChanges();
+                _context.JobOffers.Add(jobOffer);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -27,13 +27,13 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedJobOffer = Context.JobOffers
+                var selectedJobOffer = _context.JobOffers
                     .Where(jobOffer => jobOffer.Id == id)
                     .FirstOrDefault();
 
                 if (selectedJobOffer != null)
                 {
-                    Context.JobOffers.Remove(selectedJobOffer);
+                    _context.JobOffers.Remove(selectedJobOffer);
                 }
             }
             catch (Exception e)
@@ -46,7 +46,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedJobOffer = Context.JobOffers
+                var selectedJobOffer = _context.JobOffers
                     .Where(jobOffer => jobOffer.Id == id)
                     .FirstOrDefault();
                 return selectedJobOffer;
@@ -62,7 +62,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var jobOffers = Context.JobOffers.ToList();
+                var jobOffers = _context.JobOffers.ToList();
                 return jobOffers;
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace VacIT.Cruds
         {
             try
             {
-                var jobOffers = Context.JobOffers
+                var jobOffers = _context.JobOffers
                     .Where(jobOffer => jobOffer.VacITEmployerId == vacITEmployerId)
                     .ToList();
                 return jobOffers;
@@ -92,8 +92,8 @@ namespace VacIT.Cruds
         {
             try
             {
-                Context.JobOffers.Update(jobOffer);
-                Context.SaveChanges();
+                _context.JobOffers.Update(jobOffer);
+                _context.SaveChanges();
             }
             catch (Exception e)
             {
