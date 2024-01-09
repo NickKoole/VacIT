@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VacIT.Cruds;
@@ -11,14 +12,14 @@ namespace VacIT.Controllers
         private readonly ILogger<PageController> _logger;
         private VacITPageModel _vacITPageModel;
 
-        public PageController(ILogger<PageController> logger, VacITContext context)
+        public PageController(ILogger<PageController> logger, VacITContext context, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
-            CandidateApplicationCrud candidateApplicationCrud = new CandidateApplicationCrud(context);
-            _vacITPageModel = new VacITPageModel(candidateApplicationCrud);
+            VacITCrud vacITCrud = new VacITCrud(context);
+            _vacITPageModel = new VacITPageModel(vacITCrud, userManager, httpContextAccessor);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
@@ -26,6 +27,7 @@ namespace VacIT.Controllers
         [Authorize(Roles = "Admin, Candidate")]
         public IActionResult MijnSollicitaties()
         {
+            _vacITPageModel.setCandidateApplicationList();
             return View();
         }
 

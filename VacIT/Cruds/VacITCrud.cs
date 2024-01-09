@@ -2,11 +2,11 @@
 
 namespace VacIT.Cruds
 {
-    public class CandidateApplicationCrud
+    public class VacITCrud
     {
         private VacITContext _context;
 
-        public CandidateApplicationCrud(VacITContext context)
+        public VacITCrud(VacITContext context)
         {
             _context = context;
         }
@@ -16,6 +16,19 @@ namespace VacIT.Cruds
             try
             {
                 _context.Applications.Add(application);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+            }
+        }
+
+        public void CreateJobOffer(JobOffer jobOffer)
+        {
+            try
+            {
+                _context.JobOffers.Add(jobOffer);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -43,6 +56,25 @@ namespace VacIT.Cruds
             }
         }
 
+        public void DeleteJobOffer(int id)
+        {
+            try
+            {
+                var selectedJobOffer = _context.JobOffers
+                    .Where(jobOffer => jobOffer.Id == id)
+                    .FirstOrDefault();
+
+                if (selectedJobOffer != null)
+                {
+                    _context.JobOffers.Remove(selectedJobOffer);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+            }
+        }
+
         public CandidateApplication? ReadCandidateApplication(int id)
         {
             try
@@ -59,12 +91,42 @@ namespace VacIT.Cruds
             }
         }
 
+        public JobOffer? ReadJobOffer(int id)
+        {
+            try
+            {
+                var selectedJobOffer = _context.JobOffers
+                    .Where(jobOffer => jobOffer.Id == id)
+                    .FirstOrDefault();
+                return selectedJobOffer;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+        }
+
         public List<CandidateApplication>? ReadAllCandidateApplications()
         {
             try
             {
                 var candidateApplications = _context.Applications.ToList();
                 return candidateApplications;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+        }
+
+        public List<JobOffer>? ReadAllJobOffers()
+        {
+            try
+            {
+                var jobOffers = _context.JobOffers.ToList();
+                return jobOffers;
             }
             catch (Exception e)
             {
@@ -89,6 +151,22 @@ namespace VacIT.Cruds
             }
         }
 
+        public List<JobOffer>? ReadAllJobOffersByEmployerId(int vacITEmployerId)
+        {
+            try
+            {
+                var jobOffers = _context.JobOffers
+                    .Where(jobOffer => jobOffer.VacITEmployerId == vacITEmployerId)
+                    .ToList();
+                return jobOffers;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+        }
+
         public void UpdateCandidateApplication(CandidateApplication application)
         {
             try
@@ -100,6 +178,19 @@ namespace VacIT.Cruds
             {
                 Console.WriteLine($"Exception: {e.Message}");
             }
-        }        
+        }
+
+        public void UpdateJobOffer(JobOffer jobOffer)
+        {
+            try
+            {
+                _context.JobOffers.Update(jobOffer);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+            }
+        }
     }
 }

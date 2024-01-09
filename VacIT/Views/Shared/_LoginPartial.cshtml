@@ -13,7 +13,7 @@
     @if (User.IsInRole("Admin") || User.IsInRole("Candidate"))
     {
         <li class="nav-item">
-            <a id="mijnSollicitaties" class="nav-link text-light" asp-controller="Page" asp-action="MijnSollicitaties">MIJN SOLLICITATIES</a>
+                <a id="mijnSollicitaties" class="nav-link text-light" asp-controller="Page" asp-action="MijnSollicitaties">MIJN SOLLICITATIES</a>
         </li>
     }
     @if (User.IsInRole("Admin") || User.IsInRole("Employer"))

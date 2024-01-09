@@ -1,20 +1,24 @@
-﻿using VacIT.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using VacIT.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VacIT.Cruds
 {
-    public class JobOfferCrud
+    public class Crud<TEntity> where TEntity : class
     {
-        private VacITContext _context;
+        private readonly VacITContext _context;
 
-        public JobOfferCrud(VacITContext context)
+        public Crud(VacITContext context)
         {
             _context = context;
         }
-        public void CreateJobOffer(JobOffer jobOffer)
+
+        public void Create(TEntity entity)
         {
             try
             {
-                _context.JobOffers.Add(jobOffer);
+                _context.Set<TEntity>().Add(entity);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -23,17 +27,15 @@ namespace VacIT.Cruds
             }
         }
 
-        public void DeleteJobOffer(int id)
+        public void Delete(int id)
         {
             try
             {
-                var selectedJobOffer = _context.JobOffers
-                    .Where(jobOffer => jobOffer.Id == id)
-                    .FirstOrDefault();
+                var selectedEntity = _context.Set<TEntity>().Find(id);
 
-                if (selectedJobOffer != null)
+                if (selectedEntity != null)
                 {
-                    _context.JobOffers.Remove(selectedJobOffer);
+                    _context.Set<TEntity>().Remove(selectedEntity);
                 }
             }
             catch (Exception e)
@@ -42,14 +44,12 @@ namespace VacIT.Cruds
             }
         }
 
-        public JobOffer? ReadJobOffer(int id)
+        public TEntity? Read(int id)
         {
             try
             {
-                var selectedJobOffer = _context.JobOffers
-                    .Where(jobOffer => jobOffer.Id == id)
-                    .FirstOrDefault();
-                return selectedJobOffer;
+                var selectedEntity = _context.Set<TEntity>().Find(id);
+                return selectedEntity;
             }
             catch (Exception e)
             {
@@ -58,12 +58,12 @@ namespace VacIT.Cruds
             }
         }
 
-        public List<JobOffer>? ReadAllJobOffers()
+        public List<TEntity>? ReadAll()
         {
             try
             {
-                var jobOffers = _context.JobOffers.ToList();
-                return jobOffers;
+                var entities = _context.Set<TEntity>().ToList();
+                return entities;
             }
             catch (Exception e)
             {
@@ -72,14 +72,14 @@ namespace VacIT.Cruds
             }
         }
 
-        public List<JobOffer>? ReadAllJobOffersByEmployerId(int vacITEmployerId)
+        public List<TEntity>? ReadAllById(int foreignKeyId, Func<TEntity, int> foreignKeySelector)
         {
             try
             {
-                var jobOffers = _context.JobOffers
-                    .Where(jobOffer => jobOffer.VacITEmployerId == vacITEmployerId)
+                var entities = _context.Set<TEntity>()
+                    .Where(entity => foreignKeySelector(entity) == foreignKeyId)
                     .ToList();
-                return jobOffers;
+                return entities;
             }
             catch (Exception e)
             {
@@ -88,11 +88,11 @@ namespace VacIT.Cruds
             }
         }
 
-        public void UpdateJobOffer(JobOffer jobOffer)
+        public void Update(TEntity entity)
         {
             try
             {
-                _context.JobOffers.Update(jobOffer);
+                _context.Set<TEntity>().Update(entity);
                 _context.SaveChanges();
             }
             catch (Exception e)
