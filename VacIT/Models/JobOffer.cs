@@ -9,7 +9,7 @@ namespace VacIT.Models
         [Column(TypeName = "nvarchar(20)")]
         public string Name { get; set; }
 
-        [Column(TypeName = "nvarchar(20)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; }
 
         [Column(TypeName = "nvarchar(max)")]
