@@ -197,16 +197,18 @@ namespace VacIT.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Motivation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VacItCandidateId = table.Column<int>(type: "int", nullable: false),
+                    Invited = table.Column<bool>(type: "bit", nullable: false),
+                    VacITCandidateId = table.Column<int>(type: "int", nullable: false),
                     JobOfferId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Applications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Applications_AspNetUsers_VacItCandidateId",
-                        column: x => x.VacItCandidateId,
+                        name: "FK_Applications_AspNetUsers_VacITCandidateId",
+                        column: x => x.VacITCandidateId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -226,7 +228,7 @@ namespace VacIT.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_VacITCandidateId",
                 table: "Applications",
-                column: "VacItCandidateId");
+                column: "VacITCandidateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

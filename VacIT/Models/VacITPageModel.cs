@@ -9,7 +9,7 @@ namespace VacIT.Models
         private VacITCrud _vacITCrud;
         private UserManager<VacITUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public List<CandidateApplication> _candidateApplicationList { get; set; }
+        public List<CandidateApplication> _candidateApplications { get; set; }
         public List<JobOffer> _jobOffers { get; set; }
 
         public VacITPageModel(VacITCrud candidateApplicationCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
@@ -23,7 +23,7 @@ namespace VacIT.Models
         {
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             int userId = int.Parse(tempUserId);
-            _candidateApplicationList = _vacITCrud.ReadAllCandidateApplicationsByCandidateId(userId);
+            _candidateApplications = _vacITCrud.ReadAllCandidateApplicationsByCandidateId(userId);
         }
 
         public void SetJobOffers()

@@ -167,6 +167,9 @@ namespace VacIT.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateOnly>("ApplicationDate")
+                        .HasColumnType("date");
+
                     b.Property<bool>("Invited")
                         .HasColumnType("bit");
 
@@ -177,14 +180,14 @@ namespace VacIT.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VacItCandidateId")
+                    b.Property<int>("VacITCandidateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("JobOfferId");
 
-                    b.HasIndex("VacItCandidateId");
+                    b.HasIndex("VacITCandidateId");
 
                     b.ToTable("Applications");
                 });
@@ -222,7 +225,7 @@ namespace VacIT.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("VacITEmployerId")
                         .HasColumnType("int");
@@ -410,7 +413,7 @@ namespace VacIT.Migrations
 
                     b.HasOne("VacIT.Models.VacITCandidate", "VacITCandidate")
                         .WithMany("Applications")
-                        .HasForeignKey("VacItCandidateId")
+                        .HasForeignKey("VacITCandidateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -6,3 +6,22 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>Hier komen uw openstaande sollicitaties te staan</p>
+
+<table>
+    <tr>
+        <th>Datum</th>
+        <th>Vacature</th>
+        <th>Bedrijf</th>
+        <th>Uitgenodigd</th>
+    </tr>
+
+    @foreach (CandidateApplication candidateApplication in Model._candidateApplications)
+    {
+        <tr>
+            <td>@candidateApplication.ApplicationDate</td>
+            <td>@candidateApplication.JobOffer.Title</td>
+            <td>@candidateApplication.JobOffer.VacITEmployer.Name</td>
+            <td>@candidateApplication.Invited</td>
+        </tr>
+    }
+</table>

@@ -79,27 +79,19 @@ namespace VacIT.Models
 
                     dbContext.JobOffers.AddRange(jobOffers);
                     await dbContext.SaveChangesAsync();
+
+                    if (!dbContext.Applications.Any())
+                    {
+                        DateOnly date = new DateOnly(2024, 1, 10);
+                        CandidateApplication[] candidateApplications = { new CandidateApplication(date, "Ik ben zeer geschikt voor deze baan.", true, candidateUsers[0], jobOffers[0]),
+                                                                         new CandidateApplication(date, "Ik vind studenten begeleiden erg leuk.", false, candidateUsers[0], jobOffers[2]),
+                                                                         new CandidateApplication(date, "Ik ben een expert op dit gebied.", true, candidateUsers[0], jobOffers[3])
+                                                                       };
+                        dbContext.Applications.AddRange(candidateApplications);
+                        await dbContext.SaveChangesAsync();
+                    }
                 }
             }
-
-            /*
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<VacITContext>();
-
-                if (!dbContext.JobOffers.Any())
-                {
-                    DateOnly date = new DateOnly(2024, 1, 1);
-                    JobOffer jobOffer = new JobOffer("Testnaam", "Testtitel", "Testbeschrijving", "Windows", "Testlevel", "Teststad", date);
-                    dbContext.JobOffers.Add(jobOffer);
-                    await dbContext.SaveChangesAsync();
-
-                    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<VacITUser>>();
-
-                }
-            }
-            */
-
         }
     }
 }

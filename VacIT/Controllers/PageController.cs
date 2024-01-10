@@ -28,7 +28,7 @@ namespace VacIT.Controllers
         public IActionResult MijnSollicitaties()
         {
             _vacITPageModel.SetCandidateApplicationList();
-            return View();
+            return View(_vacITPageModel);
         }
 
         [Authorize(Roles = "Admin, Employer")]

@@ -83,6 +83,7 @@ namespace VacIT.Cruds
                 var selectedApplication = _context.Applications
                     .Include(a => a.VacITCandidate)
                     .Include(a => a.JobOffer)
+                        .ThenInclude(j => j.VacITEmployer)
                     .Where(application => application.Id == id)
                     .FirstOrDefault();
                 return selectedApplication;
@@ -118,6 +119,7 @@ namespace VacIT.Cruds
                 var candidateApplications = _context.Applications
                     .Include(a => a.VacITCandidate)
                     .Include(a => a.JobOffer)
+                        .ThenInclude(j => j.VacITEmployer)
                     .ToList();
                 return candidateApplications;
             }
@@ -151,6 +153,7 @@ namespace VacIT.Cruds
                 var candidateApplications = _context.Applications
                     .Include(a => a.VacITCandidate)
                     .Include(a => a.JobOffer)
+                        .ThenInclude(j => j.VacITEmployer)
                     .Where(candidateApplication => candidateApplication.VacITCandidateId == vacITCandidateId)
                     .ToList();
                 return candidateApplications;

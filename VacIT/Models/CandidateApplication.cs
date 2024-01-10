@@ -6,6 +6,8 @@ namespace VacIT.Models
     {
         public int Id { get; set; }
 
+        public DateOnly ApplicationDate { get; set; }
+
         [Column(TypeName = "nvarchar(max)")]
         public string Motivation {  get; set; }
 
@@ -24,14 +26,14 @@ namespace VacIT.Models
 
         }
 
-        public CandidateApplication(int id, string motivation, bool invited, int vacItCandidateId, VacITCandidate vacITCandidate, int jobOfferId, JobOffer jobOffer)
+        public CandidateApplication(DateOnly date, string motivation, bool invited, VacITCandidate vacITCandidate, JobOffer jobOffer)
         {
-            Id = id;
+            ApplicationDate = date;
             Motivation = motivation;
             Invited = invited;
-            VacITCandidateId = vacItCandidateId;
+            VacITCandidateId = vacITCandidate.Id;
             VacITCandidate = vacITCandidate;
-            JobOfferId = jobOfferId;
+            JobOfferId = jobOffer.Id;
             JobOffer = jobOffer;
         }
     }
