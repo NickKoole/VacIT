@@ -6,13 +6,13 @@ namespace VacIT.Models
 {
     public class VacITPageModel
     {
-        private VacITCrud _vacITCrud;
+        private IVacITCrud _vacITCrud;
         private UserManager<VacITUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public List<CandidateApplication> _candidateApplications { get; set; }
         public List<JobOffer> _jobOffers { get; set; }
 
-        public VacITPageModel(VacITCrud candidateApplicationCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public VacITPageModel(IVacITCrud candidateApplicationCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _vacITCrud = candidateApplicationCrud;
             _userManager = userManager;

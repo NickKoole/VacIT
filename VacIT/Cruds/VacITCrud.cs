@@ -3,7 +3,7 @@ using VacIT.Models;
 
 namespace VacIT.Cruds
 {
-    public class VacITCrud
+    public class VacITCrud : IVacITCrud
     {
         private VacITContext _context;
 

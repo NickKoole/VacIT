@@ -12,10 +12,9 @@ namespace VacIT.Controllers
         private readonly ILogger<PageController> _logger;
         private VacITPageModel _vacITPageModel;
 
-        public PageController(ILogger<PageController> logger, VacITContext context, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public PageController(ILogger<PageController> logger, IVacITCrud vacITCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
-            VacITCrud vacITCrud = new VacITCrud(context);
             _vacITPageModel = new VacITPageModel(vacITCrud, userManager, httpContextAccessor);
         }
 
