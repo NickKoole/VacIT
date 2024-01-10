@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using VacIT.Models;
+using VacIT.Cruds;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("VacITContextConnection") ?? throw new InvalidOperationException("Connection string 'VacITContextConnection' not found.");
 
-builder.Services.AddDbContext<VacITContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<VacITContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
+
+builder.Services.TryAddScoped<VacITCrud>();
 
 builder.Services.AddDefaultIdentity<VacITUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole<int>>()

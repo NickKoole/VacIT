@@ -19,14 +19,14 @@ namespace VacIT.Models
             _httpContextAccessor = httpContextAccessor;
         }
         
-        public void setCandidateApplicationList()
+        public void SetCandidateApplicationList()
         {
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             int userId = int.Parse(tempUserId);
             _candidateApplicationList = _vacITCrud.ReadAllCandidateApplicationsByCandidateId(userId);
         }
 
-        public void setJobOffers()
+        public void SetJobOffers()
         {
             _jobOffers = _vacITCrud.ReadAllJobOffers();
         }

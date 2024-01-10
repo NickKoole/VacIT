@@ -27,7 +27,7 @@ namespace VacIT.Controllers
         [Authorize(Roles = "Admin, Candidate")]
         public IActionResult MijnSollicitaties()
         {
-            _vacITPageModel.setCandidateApplicationList();
+            _vacITPageModel.SetCandidateApplicationList();
             return View();
         }
 
@@ -44,7 +44,8 @@ namespace VacIT.Controllers
 
         public IActionResult Vacatures()
         {
-            return View();
+            _vacITPageModel.SetJobOffers();
+            return View(_vacITPageModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

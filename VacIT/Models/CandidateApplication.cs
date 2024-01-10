@@ -12,7 +12,7 @@ namespace VacIT.Models
         public bool Invited { get; set; } = false;
 
         //Many to one relatie wordt hieronder aangemaakt met een VacITCandidate
-        public int VacItCandidateId { get; set; }
+        public int VacITCandidateId { get; set; }
         public VacITCandidate VacITCandidate { get; set; } = null!;
 
         //Many to one relatie wordt hieronder aangemaakt met een JobOffer
@@ -29,7 +29,7 @@ namespace VacIT.Models
             Id = id;
             Motivation = motivation;
             Invited = invited;
-            VacItCandidateId = vacItCandidateId;
+            VacITCandidateId = vacItCandidateId;
             VacITCandidate = vacITCandidate;
             JobOfferId = jobOfferId;
             JobOffer = jobOffer;

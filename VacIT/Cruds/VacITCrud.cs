@@ -1,4 +1,5 @@
-﻿using VacIT.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using VacIT.Models;
 
 namespace VacIT.Cruds
 {
@@ -80,6 +81,8 @@ namespace VacIT.Cruds
             try
             {
                 var selectedApplication = _context.Applications
+                    .Include(a => a.VacITCandidate)
+                    .Include(a => a.JobOffer)
                     .Where(application => application.Id == id)
                     .FirstOrDefault();
                 return selectedApplication;
@@ -96,7 +99,8 @@ namespace VacIT.Cruds
             try
             {
                 var selectedJobOffer = _context.JobOffers
-                    .Where(jobOffer => jobOffer.Id == id)
+                    .Include(j => j.VacITEmployer)
+                    .Where(j => j.Id == id)
                     .FirstOrDefault();
                 return selectedJobOffer;
             }
@@ -111,7 +115,10 @@ namespace VacIT.Cruds
         {
             try
             {
-                var candidateApplications = _context.Applications.ToList();
+                var candidateApplications = _context.Applications
+                    .Include(a => a.VacITCandidate)
+                    .Include(a => a.JobOffer)
+                    .ToList();
                 return candidateApplications;
             }
             catch (Exception e)
@@ -125,7 +132,9 @@ namespace VacIT.Cruds
         {
             try
             {
-                var jobOffers = _context.JobOffers.ToList();
+                var jobOffers = _context.JobOffers
+                    .Include(j => j.VacITEmployer)
+                    .ToList();
                 return jobOffers;
             }
             catch (Exception e)
@@ -140,7 +149,9 @@ namespace VacIT.Cruds
             try
             {
                 var candidateApplications = _context.Applications
-                    .Where(candidateApplication => candidateApplication.VacItCandidateId == vacITCandidateId)
+                    .Include(a => a.VacITCandidate)
+                    .Include(a => a.JobOffer)
+                    .Where(candidateApplication => candidateApplication.VacITCandidateId == vacITCandidateId)
                     .ToList();
                 return candidateApplications;
             }
@@ -156,6 +167,7 @@ namespace VacIT.Cruds
             try
             {
                 var jobOffers = _context.JobOffers
+                    .Include(j => j.VacITEmployer)
                     .Where(jobOffer => jobOffer.VacITEmployerId == vacITEmployerId)
                     .ToList();
                 return jobOffers;

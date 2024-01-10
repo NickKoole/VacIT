@@ -224,7 +224,7 @@ namespace VacIT.Migrations
                 column: "JobOfferId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Applications_VacItCandidateId",
+                name: "IX_Applications_VacITCandidateId",
                 table: "Applications",
                 column: "VacItCandidateId");
 
