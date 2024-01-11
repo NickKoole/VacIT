@@ -12,5 +12,6 @@ namespace VacIT.Models
         void GetJobOfferById(int id);
         void GetJobOffers();
         void GetJobOffersByUserId();
+        void UpdateJobOffer(JobOffer jobOffer);
     }
 }

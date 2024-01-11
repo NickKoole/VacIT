@@ -30,6 +30,18 @@ namespace VacIT.Controllers
             return View(_vacITPageModel);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Employer")]
+        public IActionResult EditVacature(JobOffer jobOffer)
+        {
+            if (ModelState.IsValid)
+            {
+                _vacITPageModel.UpdateJobOffer(jobOffer);
+                return RedirectToAction("Index");
+            }
+            return View(jobOffer);
+        }
+
         [Authorize(Roles = "Candidate")]
         public IActionResult MijnSollicitaties()
         {

@@ -43,5 +43,10 @@ namespace VacIT.Models
             int userId = int.Parse(tempUserId);
             _jobOffers = _vacITCrud.ReadJobOffersByEmployerId(userId);
         }
+
+        public void UpdateJobOffer(JobOffer jobOffer)
+        {
+            _vacITCrud.UpdateJobOffer(jobOffer);
+        }
     }
 }

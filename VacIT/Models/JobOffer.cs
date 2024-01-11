@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VacIT.Models
 {
@@ -6,21 +7,39 @@ namespace VacIT.Models
     {
         public int Id { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        [Required(ErrorMessage = "Er moet een naam opgegeven worden.")]
+        [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
         public string Name { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required(ErrorMessage = "Er moet een titel opgegeven worden.")]
+        [StringLength(100)]
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required(ErrorMessage = "Er moet een beschrijving opgegeven worden.")]
+        [StringLength(1000)]
         [Column(TypeName = "nvarchar(max)")]
         public string Description { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        [Required(ErrorMessage = "Er moet een technologie opgegeven worden.")]
+        [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
         public string Technology { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
+        [Required(ErrorMessage = "Er moet een niveau opgegeven worden.")]
+        [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
         public string Level { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required(ErrorMessage = "Er moet een stad opgegeven worden.")]
+        [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
         public string City { get; set; }
 

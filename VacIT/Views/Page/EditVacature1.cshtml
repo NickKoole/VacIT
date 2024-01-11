@@ -1,0 +1,68 @@
+﻿@model VacITPageModel;
+
+@{
+    ViewData["Title"] = "Vacature aanpassen";
+}
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Model._jobOffer.Title</h3>
+
+<div>
+    <form asp-action="EditVacature" method="post">
+        <table>
+            <tr>
+                <th>Naam</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.Name" />
+                    <span asp-validation-for="@Model._jobOffer.Name"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Titel</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.Title" />
+                    <span asp-validation-for="@Model._jobOffer.Title"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Beschrijving</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.Description" />
+                    <span asp-validation-for="@Model._jobOffer.Description"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Technologie</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.Technology" />
+                    <span asp-validation-for="@Model._jobOffer.Technology"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.Level" />
+                    <span asp-validation-for="@Model._jobOffer.Level"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Stad</th>
+                <td>
+                    <input type="text" asp-for="@Model._jobOffer.City" />
+                    <span asp-validation-for="@Model._jobOffer.City"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>Datum van publicatie</th>
+                <td>@Model._jobOffer.DateOfPublication</td>
+            </tr>
+            <tr>
+                <th>Werkgever</th>
+                <td>@Model._jobOffer.VacITEmployer.Name</td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Opslaan</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
