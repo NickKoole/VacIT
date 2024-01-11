@@ -5,4 +5,28 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Hier komen vacatures van de ingelogde een werkgever</p>
+<div>
+    <table>
+        <tr>
+            <th>Publicatiedatum</th>
+            <th>Naam</th>
+            <th>Beschrijving</th>
+            <th>Technologie</th>
+            <th>Niveau</th>
+            <th>Stad</th>
+        </tr>
+
+        @foreach (JobOffer jobOffer in Model._jobOffers)
+        {
+            <tr>
+                <td>@jobOffer.DateOfPublication</td>
+                <td> <a asp-controller="Page" asp-action="Vacature" asp-route-id="@jobOffer.Id">@jobOffer.Name</a></td>
+                <td>@jobOffer.Description</td>
+                <td>@jobOffer.Technology</td>
+                <td>@jobOffer.Level</td>
+                <td>@jobOffer.City</td>
+                <td><a asp-controller="Page" asp-action="EditVacature" asp-route-id="@jobOffer.Id">Edit</a></td>
+            </tr>
+        }
+    </table>
+</div>

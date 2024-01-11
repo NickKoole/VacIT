@@ -10,6 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("VacITContextCo
 builder.Services.AddDbContext<VacITContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
 
 builder.Services.TryAddScoped<IVacITCrud, VacITCrud>();
+builder.Services.TryAddScoped<IVacITPageModel, VacITPageModel>();
 
 builder.Services.AddDefaultIdentity<VacITUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole<int>>()

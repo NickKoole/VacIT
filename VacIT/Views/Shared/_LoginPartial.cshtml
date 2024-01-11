@@ -10,13 +10,13 @@
     <li class="nav-item">
         <a id="vacatures" class="nav-link text-light" asp-controller="Page" asp-action="Vacatures">VACATURES</a>
     </li>
-    @if (User.IsInRole("Admin") || User.IsInRole("Candidate"))
+    @if (User.IsInRole("Candidate"))
     {
         <li class="nav-item">
                 <a id="mijnSollicitaties" class="nav-link text-light" asp-controller="Page" asp-action="MijnSollicitaties">MIJN SOLLICITATIES</a>
         </li>
     }
-    @if (User.IsInRole("Admin") || User.IsInRole("Employer"))
+    @if (User.IsInRole("Employer"))
     {
         <li class="nav-item">
             <a id="mijnVacatures" class="nav-link text-light" asp-controller="Page" asp-action="MijnVacatures">MIJN VACATURES</a>

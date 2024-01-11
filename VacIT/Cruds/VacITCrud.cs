@@ -146,7 +146,7 @@ namespace VacIT.Cruds
             }
         }
 
-        public List<CandidateApplication>? ReadAllCandidateApplicationsByCandidateId(int vacITCandidateId)
+        public List<CandidateApplication>? ReadCandidateApplicationsByCandidateId(int vacITCandidateId)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace VacIT.Cruds
             }
         }
 
-        public List<JobOffer>? ReadAllJobOffersByEmployerId(int vacITEmployerId)
+        public List<JobOffer>? ReadJobOffersByEmployerId(int vacITEmployerId)
         {
             try
             {

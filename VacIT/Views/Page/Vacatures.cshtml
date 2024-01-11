@@ -5,31 +5,31 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Hier zijn alle vacatures inzichtelijk</p>
-
-<table>
-    <tr>
-        <th>Naam</th>
-        <th>Titel</th>
-        <th>Beschrijving</th>
-        <th>Technologie</th>
-        <th>Niveau</th>
-        <th>Stad</th>
-        <th>Datum van publicatie</th>
-        <th>Werkgever</th>
-    </tr>
-
-    @foreach (JobOffer jobOffer in Model._jobOffers)
-    {
+<div>
+    <table>
         <tr>
-            <td>@jobOffer.Name</td>
-            <td>@jobOffer.Title</td>
-            <td>@jobOffer.Description</td>
-            <td>@jobOffer.Technology</td>
-            <td>@jobOffer.Level</td>
-            <td>@jobOffer.City</td>
-            <td>@jobOffer.DateOfPublication</td>
-            <td>@jobOffer.VacITEmployer.Name</td>
+            <th>Naam</th>
+            <th>Titel</th>
+            <th>Beschrijving</th>
+            <th>Technologie</th>
+            <th>Niveau</th>
+            <th>Stad</th>
+            <th>Datum van publicatie</th>
+            <th>Werkgever</th>
         </tr>
-    }
-</table>
+
+        @foreach (JobOffer jobOffer in Model._jobOffers)
+        {
+            <tr>
+                <td> <a asp-controller="Page" asp-action="Vacature" asp-route-id="@jobOffer.Id">@jobOffer.Name</a></td>
+                <td>@jobOffer.Title</td>
+                <td>@jobOffer.Description</td>
+                <td>@jobOffer.Technology</td>
+                <td>@jobOffer.Level</td>
+                <td>@jobOffer.City</td>
+                <td>@jobOffer.DateOfPublication</td>
+                <td>@jobOffer.VacITEmployer.Name</td>
+            </tr>
+        }
+    </table>
+</div>

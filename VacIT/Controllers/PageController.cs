@@ -10,12 +10,12 @@ namespace VacIT.Controllers
     public class PageController : Controller
     {
         private readonly ILogger<PageController> _logger;
-        private VacITPageModel _vacITPageModel;
+        private IVacITPageModel _vacITPageModel;
 
-        public PageController(ILogger<PageController> logger, IVacITCrud vacITCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public PageController(ILogger<PageController> logger, IVacITPageModel pageModel)
         {
             _logger = logger;
-            _vacITPageModel = new VacITPageModel(vacITCrud, userManager, httpContextAccessor);
+            _vacITPageModel = pageModel;
         }
 
         public async Task<IActionResult> Index()
@@ -23,17 +23,25 @@ namespace VacIT.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, Candidate")]
-        public IActionResult MijnSollicitaties()
+        [Authorize(Roles = "Employer")]
+        public IActionResult EditVacature(int id)
         {
-            _vacITPageModel.SetCandidateApplicationList();
+            _vacITPageModel.GetJobOfferById(id);
             return View(_vacITPageModel);
         }
 
-        [Authorize(Roles = "Admin, Employer")]
+        [Authorize(Roles = "Candidate")]
+        public IActionResult MijnSollicitaties()
+        {
+            _vacITPageModel.GetCandidateApplicationList();
+            return View(_vacITPageModel);
+        }
+
+        [Authorize(Roles = "Employer")]
         public IActionResult MijnVacatures()
         {
-            return View();
+            _vacITPageModel.GetJobOffersByUserId();
+            return View(_vacITPageModel);
         }
 
         public IActionResult Privacy()
@@ -41,9 +49,15 @@ namespace VacIT.Controllers
             return View();
         }
 
+        public IActionResult Vacature(int id)
+        {
+            _vacITPageModel.GetJobOfferById(id);
+            return View(_vacITPageModel);
+        }
+
         public IActionResult Vacatures()
         {
-            _vacITPageModel.SetJobOffers();
+            _vacITPageModel.GetJobOffers();
             return View(_vacITPageModel);
         }
 

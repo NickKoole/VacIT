@@ -1,0 +1,45 @@
+﻿@model VacITPageModel;
+
+@{
+    ViewData["Title"] = "Vacature aanpassen";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>@Model._jobOffer.Title</p>
+
+<div>
+    <table>
+        <tr>
+            <th>Naam</th>
+            <td>@Model._jobOffer.Name</td>
+        </tr>
+        <tr>
+            <th>Titel</th>
+            <td>@Model._jobOffer.Title</td>
+        </tr>
+        <tr>
+            <th>Beschrijving</th>
+            <td>@Model._jobOffer.Description</td>
+        </tr>
+        <tr>
+            <th>Technologie</th>
+            <td>@Model._jobOffer.Technology</td>
+        </tr>
+        <tr>
+            <th>Niveau</th>
+            <td>@Model._jobOffer.Level</td>
+        </tr>
+        <tr>
+            <th>Stad</th>
+            <td>@Model._jobOffer.City</td>
+        </tr>
+        <tr>
+            <th>Datum van publicatie</th>
+            <td>@Model._jobOffer.DateOfPublication</td>
+        </tr>
+        <tr>
+            <th>Werkgever</th>
+            <td>@Model._jobOffer.VacITEmployer.Name</td>
+        </tr>
+    </table>
+</div>
