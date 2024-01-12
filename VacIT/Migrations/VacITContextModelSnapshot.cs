@@ -189,7 +189,7 @@ namespace VacIT.Migrations
 
                     b.HasIndex("VacITCandidateId");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Applications", (string)null);
                 });
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
@@ -234,7 +234,7 @@ namespace VacIT.Migrations
 
                     b.HasIndex("VacITEmployerId");
 
-                    b.ToTable("JobOffers");
+                    b.ToTable("JobOffers", (string)null);
                 });
 
             modelBuilder.Entity("VacIT.Models.VacITUser", b =>

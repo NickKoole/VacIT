@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using System;
 using System.Diagnostics;
 using VacIT.Cruds;
 using VacIT.Models;
@@ -27,17 +29,23 @@ namespace VacIT.Controllers
         public IActionResult EditVacature(int id)
         {
             _vacITPageModel.GetJobOfferById(id);
-            return View(_vacITPageModel);
+            return View(_vacITPageModel._jobOffer);
         }
 
         [HttpPost]
         [Authorize(Roles = "Employer")]
         public IActionResult EditVacature(JobOffer jobOffer)
         {
+            _vacITPageModel.GetCurrentEmployer();
+            jobOffer.VacITEmployer = _vacITPageModel._vacITEmployer;
+
+            //De error omtrent de VacITEmployer wordt eruit gehaald door middel van de onderstaande regel, deze error is irrelevant nu VacITEmployer hierboven in het object wordt gezet
+            ModelState.Remove(nameof(JobOffer.VacITEmployer));
+
             if (ModelState.IsValid)
             {
                 _vacITPageModel.UpdateJobOffer(jobOffer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Vacature", new { id = jobOffer.Id });
             }
             return View(jobOffer);
         }

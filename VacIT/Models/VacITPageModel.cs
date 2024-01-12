@@ -13,10 +13,11 @@ namespace VacIT.Models
         public CandidateApplication _candidateApplication { get; set; }
         public List<JobOffer> _jobOffers { get; set; }
         public JobOffer _jobOffer { get; set; }
+        public VacITEmployer _vacITEmployer { get; set; }
 
-        public VacITPageModel(IVacITCrud candidateApplicationCrud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public VacITPageModel(IVacITCrud crud, UserManager<VacITUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
-            _vacITCrud = candidateApplicationCrud;
+            _vacITCrud = crud;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
         }
@@ -26,6 +27,11 @@ namespace VacIT.Models
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             int userId = int.Parse(tempUserId);
             _candidateApplications = _vacITCrud.ReadCandidateApplicationsByCandidateId(userId);
+        }
+
+        public void GetCurrentEmployer()
+        {
+            _vacITEmployer = (VacITEmployer)_userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
         }
 
         public void GetJobOfferById(int id)
