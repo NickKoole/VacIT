@@ -9,11 +9,12 @@ namespace VacIT.Cruds
         void DeleteCandidateApplication(int id);
         void DeleteJobOffer(int id);
         List<CandidateApplication>? ReadAllCandidateApplications();
-        List<CandidateApplication>? ReadCandidateApplicationsByCandidateId(int vacITCandidateId);
-        List<JobOffer>? ReadAllJobOffers();
-        List<JobOffer>? ReadJobOffersByEmployerId(int vacITEmployerId);
         CandidateApplication? ReadCandidateApplication(int id);
+        List<CandidateApplication>? ReadCandidateApplicationsByCandidateId(int vacITCandidateId);
+        public List<CandidateApplication>? ReadCandidateApplicationsByJobOfferId(int vacITJobOfferId);
+        List<JobOffer>? ReadAllJobOffers();
         JobOffer? ReadJobOffer(int id);
+        List<JobOffer>? ReadJobOffersByEmployerId(int vacITEmployerId);
         void UpdateCandidateApplication(CandidateApplication application);
         void UpdateJobOffer(JobOffer jobOffer);
     }

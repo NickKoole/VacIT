@@ -6,10 +6,10 @@ namespace VacIT.Models
 {
     public class VacITPageModel : IVacITPageModel
     {
-        public DateOnly _currentDate { get; set; }
-        private IVacITCrud _vacITCrud;
-        private UserManager<VacITUser> _userManager;
+        private readonly IVacITCrud _vacITCrud;
+        private readonly UserManager<VacITUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        public DateOnly _currentDate { get; set; }
         public List<CandidateApplication> _candidateApplications { get; set; }
         public CandidateApplication _candidateApplication { get; set; }
         public List<JobOffer> _jobOffers { get; set; }
@@ -36,6 +36,18 @@ namespace VacIT.Models
         public void DeleteJobOffer(int id)
         {
             _vacITCrud.DeleteJobOffer(id);
+        }
+
+        public void GetCandidateApplicationsByJobOfferId(int id)
+        {
+            _candidateApplications = _vacITCrud.ReadCandidateApplicationsByJobOfferId(id);
+            if (_candidateApplications.Any())
+            {
+                _jobOffer = _candidateApplications[0].JobOffer;
+            } else
+            {
+                _jobOffer = _vacITCrud.ReadJobOffer(id);
+            }
         }
 
         public void GetCandidateApplicationList()

@@ -172,6 +172,25 @@ namespace VacIT.Cruds
             }
         }
 
+        public List<CandidateApplication>? ReadCandidateApplicationsByJobOfferId(int vacITJobOfferId)
+        {
+            try
+            {
+                var candidateApplications = _context.Applications
+                    .Include(a => a.VacITCandidate)
+                    .Include(a => a.JobOffer)
+                        .ThenInclude(j => j.VacITEmployer)
+                    .Where(candidateApplication => candidateApplication.JobOfferId == vacITJobOfferId)
+                    .ToList();
+                return candidateApplications;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception: {e.Message}");
+                return null;
+            }
+        }
+
         public List<JobOffer>? ReadJobOffersByEmployerId(int vacITEmployerId)
         {
             try

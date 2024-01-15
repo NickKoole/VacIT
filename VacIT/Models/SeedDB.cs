@@ -83,7 +83,9 @@ namespace VacIT.Models
                     if (!dbContext.Applications.Any())
                     {
                         DateOnly date = new DateOnly(2024, 1, 10);
-                        CandidateApplication[] candidateApplications = { new CandidateApplication(date, "Ik ben zeer geschikt voor deze baan.", true, candidateUsers[0], jobOffers[0]),
+                        CandidateApplication[] candidateApplications = { new CandidateApplication(date, "Ik ben zeer geschikt voor deze baan.", false, candidateUsers[0], jobOffers[0]),
+                                                                         new CandidateApplication(date, "Ik ben heb veel werkervaring op dit gebied.", true, candidateUsers[1], jobOffers[0]),
+                                                                         new CandidateApplication(date, "Werken vind ik stom.", false, candidateUsers[2], jobOffers[0]),
                                                                          new CandidateApplication(date, "Ik vind studenten begeleiden erg leuk.", false, candidateUsers[0], jobOffers[2]),
                                                                          new CandidateApplication(date, "Ik ben een expert op dit gebied.", true, candidateUsers[0], jobOffers[3])
                                                                        };

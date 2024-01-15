@@ -13,6 +13,7 @@ namespace VacIT.Models
         void CreateJobOffer(JobOffer jobOffer);
         void DeleteJobOffer(int id);
         void GetCandidateApplicationList();
+        public void GetCandidateApplicationsByJobOfferId(int id);
         void SetCurrentDate();
         void SetCurrentEmployer();
         void GetJobOfferById(int id);

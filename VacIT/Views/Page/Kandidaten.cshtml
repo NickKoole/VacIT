@@ -1,0 +1,55 @@
+﻿@model VacITPageModel
+
+@{
+    ViewData["Title"] = "Kandidaten";
+}
+
+<h1>@Model._jobOffer.Title</h1>
+<br />
+<h4>Kandidaten</h4>
+
+@if (Model._candidateApplications.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model._candidateApplication.ApplicationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model._candidateApplication.VacITCandidate.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model._candidateApplication.VacITCandidate.LastName)
+                </th>
+                <th></th>
+                <th>Uitgenodigd</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model._candidateApplications)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacITCandidate.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacITCandidate.LastName)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Page" asp-action="Sollicitatie" asp-route-id="Sollicitatie">Bekijk sollicitatie</a>
+                    </td>
+                    <td>
+                        <input type="checkbox" disabled="disabled" @(item.Invited ? "checked" : "") />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p>Helaas heeft nog niemand gesolliciteerd</p>
+}

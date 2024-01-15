@@ -57,6 +57,13 @@ namespace VacIT.Controllers
             return View(jobOffer);
         }
 
+        [Authorize(Roles = "Employer")]
+        public IActionResult Kandidaten(int id)
+        {
+            _vacITPageModel.GetCandidateApplicationsByJobOfferId(id);
+            return View(_vacITPageModel);
+        }
+
         [Authorize(Roles = "Candidate")]
         public IActionResult MijnSollicitaties()
         {
