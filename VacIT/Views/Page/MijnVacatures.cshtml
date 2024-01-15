@@ -25,7 +25,8 @@
                 <td>@jobOffer.Technology</td>
                 <td>@jobOffer.Level</td>
                 <td>@jobOffer.City</td>
-                <td><a class="btn btn-primary ml-2" asp-controller="Page" asp-action="EditVacature" asp-route-id="@jobOffer.Id">Edit</a></td>
+                <td><a class="btn btn-primary" asp-controller="Page" asp-action="EditVacature" asp-route-id="@jobOffer.Id">Edit</a></td>
+                <td><a class="btn btn-danger" asp-controller="Page" asp-action="DeleteVacature" asp-route-id="@jobOffer.Id">Delete</a></td>
             </tr>
         }
     </table>

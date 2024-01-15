@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VacIT.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VacIT.Cruds
 {
@@ -42,13 +43,12 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedApplication = _context.Applications
-                    .Where(application => application.Id == id)
-                    .FirstOrDefault();
+                var selectedApplication = _context.Applications.FirstOrDefault(application => application.Id == id);
 
                 if (selectedApplication != null)
                 {
                     _context.Applications.Remove(selectedApplication);
+                    _context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -62,12 +62,14 @@ namespace VacIT.Cruds
             try
             {
                 var selectedJobOffer = _context.JobOffers
-                    .Where(jobOffer => jobOffer.Id == id)
-                    .FirstOrDefault();
+                    .Include(e => e.VacITEmployer)
+                    .Include(a =>  a.Applications)
+                    .FirstOrDefault(jobOffer => jobOffer.Id == id);
 
                 if (selectedJobOffer != null)
                 {
                     _context.JobOffers.Remove(selectedJobOffer);
+                    _context.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -81,9 +83,9 @@ namespace VacIT.Cruds
             try
             {
                 var selectedApplication = _context.Applications
-                    .Include(a => a.VacITCandidate)
-                    .Include(a => a.JobOffer)
-                        .ThenInclude(j => j.VacITEmployer)
+                    .Include(c => c.VacITCandidate)
+                    .Include(j => j.JobOffer)
+                        .ThenInclude(e => e.VacITEmployer)
                     .Where(application => application.Id == id)
                     .FirstOrDefault();
                 return selectedApplication;

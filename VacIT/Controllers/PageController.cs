@@ -26,6 +26,13 @@ namespace VacIT.Controllers
         }
 
         [Authorize(Roles = "Employer")]
+        public IActionResult DeleteVacature(int id)
+        {
+            _vacITPageModel.DeleteJobOffer(id);
+            return RedirectToAction("MijnVacatures");
+        }
+
+        [Authorize(Roles = "Employer")]
         public IActionResult EditVacature(int id)
         {
             _vacITPageModel.GetJobOfferById(id);

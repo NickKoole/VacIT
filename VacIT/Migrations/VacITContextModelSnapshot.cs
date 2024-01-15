@@ -189,7 +189,7 @@ namespace VacIT.Migrations
 
                     b.HasIndex("VacITCandidateId");
 
-                    b.ToTable("Applications", (string)null);
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("VacIT.Models.JobOffer", b =>
@@ -202,6 +202,7 @@ namespace VacIT.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateOnly>("DateOfPublication")
@@ -209,22 +210,27 @@ namespace VacIT.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(1000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Level")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Technology")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("VacITEmployerId")
@@ -234,7 +240,7 @@ namespace VacIT.Migrations
 
                     b.HasIndex("VacITEmployerId");
 
-                    b.ToTable("JobOffers", (string)null);
+                    b.ToTable("JobOffers");
                 });
 
             modelBuilder.Entity("VacIT.Models.VacITUser", b =>

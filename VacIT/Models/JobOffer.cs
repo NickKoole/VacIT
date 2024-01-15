@@ -58,8 +58,6 @@ namespace VacIT.Models
 
         //Many to one relatie met VacITEmployer wordt hieronder aangemaakt
         public int VacITEmployerId { get; set; }
-
-
         public VacITEmployer VacITEmployer { get; set; } = null!;
 
         public JobOffer()

@@ -9,6 +9,7 @@ namespace VacIT.Models
         JobOffer _jobOffer { get; set; }
         VacITEmployer _vacITEmployer { get; set; }
 
+        void DeleteJobOffer(int id);
         void GetCandidateApplicationList();
         void GetCurrentEmployer();
         void GetJobOfferById(int id);

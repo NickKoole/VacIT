@@ -22,6 +22,11 @@ namespace VacIT.Models
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public void DeleteJobOffer(int id)
+        {
+            _vacITCrud.DeleteJobOffer(id);
+        }
+
         public void GetCandidateApplicationList()
         {
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
