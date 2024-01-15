@@ -43,7 +43,7 @@ namespace VacIT.Controllers
         [Authorize(Roles = "Employer")]
         public IActionResult EditVacature(JobOffer jobOffer)
         {
-            _vacITPageModel.GetCurrentEmployer();
+            _vacITPageModel.SetCurrentEmployer();
             jobOffer.VacITEmployer = _vacITPageModel._vacITEmployer;
 
             //De error omtrent de VacITEmployer wordt eruit gehaald door middel van de onderstaande regel, deze error is irrelevant nu VacITEmployer hierboven in het object wordt gezet
@@ -69,6 +69,31 @@ namespace VacIT.Controllers
         {
             _vacITPageModel.GetJobOffersByUserId();
             return View(_vacITPageModel);
+        }
+
+        [Authorize(Roles = "Employer")]
+        public IActionResult NieuweVacature()
+        {
+            _vacITPageModel.SetUpNewJobOffer();
+            return View(_vacITPageModel._jobOffer);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employer")]
+        public IActionResult NieuweVacature(JobOffer jobOffer)
+        {
+            _vacITPageModel.SetCurrentEmployer();
+            jobOffer.VacITEmployer = _vacITPageModel._vacITEmployer;
+
+            //De error omtrent de VacITEmployer wordt eruit gehaald door middel van de onderstaande regel, deze error is irrelevant nu VacITEmployer hierboven in het object wordt gezet
+            ModelState.Remove(nameof(JobOffer.VacITEmployer));
+
+            if (ModelState.IsValid)
+            {
+                _vacITPageModel.CreateJobOffer(jobOffer);
+                return RedirectToAction("Vacature", new { id = _vacITPageModel._jobOffer.Id });
+            }
+            return View(jobOffer);
         }
 
         public IActionResult Privacy()

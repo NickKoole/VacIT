@@ -6,6 +6,7 @@ namespace VacIT.Models
 {
     public class VacITPageModel : IVacITPageModel
     {
+        public DateOnly _currentDate { get; set; }
         private IVacITCrud _vacITCrud;
         private UserManager<VacITUser> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -22,6 +23,16 @@ namespace VacIT.Models
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public void CreateJobOffer(JobOffer jobOffer)
+        {
+            int id = _vacITCrud.CreateJobOffer(jobOffer);
+            
+            if (id != -1)
+            {
+                GetJobOfferById(id);
+            }
+        }
+
         public void DeleteJobOffer(int id)
         {
             _vacITCrud.DeleteJobOffer(id);
@@ -32,11 +43,6 @@ namespace VacIT.Models
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             int userId = int.Parse(tempUserId);
             _candidateApplications = _vacITCrud.ReadCandidateApplicationsByCandidateId(userId);
-        }
-
-        public void GetCurrentEmployer()
-        {
-            _vacITEmployer = (VacITEmployer)_userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
         }
 
         public void GetJobOfferById(int id)
@@ -53,6 +59,23 @@ namespace VacIT.Models
             var tempUserId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             int userId = int.Parse(tempUserId);
             _jobOffers = _vacITCrud.ReadJobOffersByEmployerId(userId);
+        }
+
+        public void SetCurrentDate()
+        {
+            _currentDate = DateOnly.FromDateTime(DateTime.Now);
+        }
+
+        public void SetCurrentEmployer()
+        {
+            _vacITEmployer = (VacITEmployer)_userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
+        }
+
+        public void SetUpNewJobOffer()
+        {
+            SetCurrentDate();
+            SetCurrentEmployer();
+            _jobOffer = new JobOffer(_currentDate, _vacITEmployer);
         }
 
         public void UpdateJobOffer(JobOffer jobOffer)

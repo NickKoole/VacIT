@@ -5,7 +5,7 @@ namespace VacIT.Cruds
     public interface IVacITCrud
     {
         void CreateCandidateApplication(CandidateApplication application);
-        void CreateJobOffer(JobOffer jobOffer);
+        int CreateJobOffer(JobOffer jobOffer);
         void DeleteCandidateApplication(int id);
         void DeleteJobOffer(int id);
         List<CandidateApplication>? ReadAllCandidateApplications();

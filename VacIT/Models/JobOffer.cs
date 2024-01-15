@@ -77,5 +77,18 @@ namespace VacIT.Models
             VacITEmployerId = vacITEmployer.Id;
             VacITEmployer = vacITEmployer;
         }
+        
+        public JobOffer(DateOnly dateOfPublication, VacITEmployer vacITEmployer)
+        {
+            Name = "";
+            Title = "";
+            Description = "";
+            Technology = "";
+            Level = "";
+            City = "";
+            DateOfPublication = dateOfPublication;
+            VacITEmployerId = vacITEmployer.Id;
+            VacITEmployer = vacITEmployer;
+        }        
     }
 }

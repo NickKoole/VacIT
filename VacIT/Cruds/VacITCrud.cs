@@ -26,16 +26,18 @@ namespace VacIT.Cruds
             }
         }
 
-        public void CreateJobOffer(JobOffer jobOffer)
+        public int CreateJobOffer(JobOffer jobOffer)
         {
             try
             {
                 _context.JobOffers.Add(jobOffer);
                 _context.SaveChanges();
+                return jobOffer.Id;
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Exception: {e.Message}");
+                return -1;
             }
         }
 
@@ -43,7 +45,10 @@ namespace VacIT.Cruds
         {
             try
             {
-                var selectedApplication = _context.Applications.FirstOrDefault(application => application.Id == id);
+                var selectedApplication = _context.Applications
+                    .Include(j => j.JobOffer)
+                    .Include(v => v.VacITCandidate)
+                    .FirstOrDefault(application => application.Id == id);
 
                 if (selectedApplication != null)
                 {

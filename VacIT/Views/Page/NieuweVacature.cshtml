@@ -1,16 +1,15 @@
 ﻿@model VacIT.Models.JobOffer
 
 @{
-    ViewData["Title"] = "EditVacature";
+    ViewData["Title"] = "Nieuwe Vacature";
 }
 
-<h1>Vacature aanpassen</h1>
+<h1>Nieuwe Vacature</h1>
 
-<h4>@Model.Title</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditVacature" method="post">
+        <form asp-action="NieuweVacature" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -24,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control"/>
+                <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,11 +43,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfPublication" class="control-label"></label>
-                <input asp-for="DateOfPublication" class="form-control" readonly />
+                <input asp-for="DateOfPublication" class="form-control" readonly/>
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
             </div>
 
-            <input asp-for="Id" type="hidden" />
             <input asp-for="VacITEmployerId" type="hidden" />
 
             <div class="form-group mt-2 mb-4">
