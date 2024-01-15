@@ -1,0 +1,72 @@
+﻿@model VacITPageModel;
+
+@{
+    ViewData["Title"] = "Sollicitatie";
+}
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+@if (Model._vacITCandidate != null)
+{
+    <table class="table">
+        <tr>
+            <th><label asp-for="@Model._vacITCandidate.FirstName" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._vacITCandidate.FirstName)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._vacITCandidate.LastName" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._vacITCandidate.LastName)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._vacITCandidate.Address" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._vacITCandidate.Address)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._vacITCandidate.Zipcode" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._vacITCandidate.Zipcode)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._vacITCandidate.City" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._vacITCandidate.City)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._candidateApplication.Motivation" class="control-label"></label></th>
+            <td>
+                @Html.DisplayFor(model => model._candidateApplication.Motivation)
+            </td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._candidateApplication.ApplicationDate" class="control-label"></label></th>
+            <td>@Html.DisplayFor(model => model._candidateApplication.ApplicationDate)</td>
+        </tr>
+        <tr>
+            <th><label asp-for="@Model._candidateApplication.Invited" class="control-label"></label></th>
+            <td>
+                <input type="checkbox" disabled="disabled" @(Model._candidateApplication.Invited ? "checked" : "") />
+            </td>
+        </tr>
+    </table>
+
+    string text;
+    if (Model._candidateApplication.Invited != true)
+    {
+        text = "Nodig uit!";
+    }
+    else
+    {
+        text = "Verwijder uitnodiging";
+    }
+
+    <form asp-controller="Page" asp-action="Sollicitatie" method="post">
+        <input type="hidden" name="id" value="@Model._candidateApplication.Id" />
+        <input type="hidden" name="invited" value="@Model._invited" />
+        <button class="btn btn-primary mb-2" type="submit">@text</button>
+    </form>
+
+} else
+{
+    <p class="text-danger">Er ging helaas iets mis</p>
+}
+<div>
+    <a asp-controller="Page" asp-action="Kandidaten" asp-route-id="@Model._jobOffer.Id">Terug</a>
+</div>

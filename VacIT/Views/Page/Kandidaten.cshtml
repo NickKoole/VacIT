@@ -40,7 +40,7 @@
                         @Html.DisplayFor(modelItem => item.VacITCandidate.LastName)
                     </td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="Page" asp-action="Sollicitatie" asp-route-id="Sollicitatie">Bekijk sollicitatie</a>
+                        <a class="btn btn-primary" asp-controller="Page" asp-action="Sollicitatie" asp-route-id="@item.Id">Bekijk sollicitatie</a>
                     </td>
                     <td>
                         <input type="checkbox" disabled="disabled" @(item.Invited ? "checked" : "") />
@@ -49,7 +49,13 @@
             }
         </tbody>
     </table>
+    <div>
+        <a asp-controller="Page" asp-action="MijnVacatures">Terug</a>
+    </div>
 } else
 {
     <p>Helaas heeft nog niemand gesolliciteerd</p>
+    <div>
+        <a asp-controller="Page" asp-action="MijnVacatures">Terug</a>
+    </div>
 }

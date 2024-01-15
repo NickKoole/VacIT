@@ -82,12 +82,17 @@ namespace VacIT.Models
 
                     if (!dbContext.Applications.Any())
                     {
-                        DateOnly date = new DateOnly(2024, 1, 10);
-                        CandidateApplication[] candidateApplications = { new CandidateApplication(date, "Ik ben zeer geschikt voor deze baan.", false, candidateUsers[0], jobOffers[0]),
-                                                                         new CandidateApplication(date, "Ik ben heb veel werkervaring op dit gebied.", true, candidateUsers[1], jobOffers[0]),
-                                                                         new CandidateApplication(date, "Werken vind ik stom.", false, candidateUsers[2], jobOffers[0]),
-                                                                         new CandidateApplication(date, "Ik vind studenten begeleiden erg leuk.", false, candidateUsers[0], jobOffers[2]),
-                                                                         new CandidateApplication(date, "Ik ben een expert op dit gebied.", true, candidateUsers[0], jobOffers[3])
+                        DateOnly[] applicationDates = { new DateOnly(2024, 1, 10),
+                                                        new DateOnly(2023, 10, 27),
+                                                        new DateOnly(2023, 12, 1),
+                                                        new DateOnly(2024, 1, 3),
+                                                        new DateOnly(2023, 11, 26)
+                                                      };
+                        CandidateApplication[] candidateApplications = { new CandidateApplication(applicationDates[0], "Ik ben zeer geschikt voor deze baan.", false, candidateUsers[0], jobOffers[0]),
+                                                                         new CandidateApplication(applicationDates[1], "Ik ben heb veel werkervaring op dit gebied.", true, candidateUsers[1], jobOffers[0]),
+                                                                         new CandidateApplication(applicationDates[2], "Werken vind ik stom.", false, candidateUsers[2], jobOffers[0]),
+                                                                         new CandidateApplication(applicationDates[3], "Ik vind studenten begeleiden erg leuk.", false, candidateUsers[0], jobOffers[2]),
+                                                                         new CandidateApplication(applicationDates[4], "Ik ben een expert op dit gebied.", true, candidateUsers[0], jobOffers[3])
                                                                        };
                         dbContext.Applications.AddRange(candidateApplications);
                         await dbContext.SaveChangesAsync();

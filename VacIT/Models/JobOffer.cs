@@ -23,7 +23,7 @@ namespace VacIT.Models
         public string Title { get; set; }
 
         [DisplayName("Beschrijving")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9\s]*$")]
         [Required(ErrorMessage = "Er moet een beschrijving opgegeven worden.")]
         [StringLength(1000)]
         [Column(TypeName = "nvarchar(max)")]

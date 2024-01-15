@@ -9,7 +9,7 @@
 <a class="btn btn-primary" asp-controller="Page" asp-action="NieuweVacature">Nieuwe Vacature</a>
 
 <div>
-    <table>
+    <table class="table">
         <tr>
             <th>Publicatiedatum</th>
             <th>Naam</th>
@@ -17,6 +17,10 @@
             <th>Technologie</th>
             <th>Niveau</th>
             <th>Stad</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
 
         @foreach (JobOffer jobOffer in Model._jobOffers)

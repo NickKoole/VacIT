@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VacIT.Models
 {
@@ -6,11 +8,17 @@ namespace VacIT.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Sollicitatiedatum")]
         public DateOnly ApplicationDate { get; set; }
 
+        [DisplayName("Motivatie")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9\s]*$")]
+        [Required(ErrorMessage = "Er moet een motivatie opgegeven worden.")]
+        [StringLength(1000)]
         [Column(TypeName = "nvarchar(max)")]
         public string Motivation {  get; set; }
 
+        [DisplayName("Uitgenodigd")]
         public bool Invited { get; set; } = false;
 
         //Many to one relatie wordt hieronder aangemaakt met een VacITCandidate

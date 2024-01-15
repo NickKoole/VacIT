@@ -43,7 +43,7 @@ namespace VacIT.Controllers
         [Authorize(Roles = "Employer")]
         public IActionResult EditVacature(JobOffer jobOffer)
         {
-            _vacITPageModel.SetCurrentEmployer();
+            _vacITPageModel.GetCurrentEmployer();
             jobOffer.VacITEmployer = _vacITPageModel._vacITEmployer;
 
             //De error omtrent de VacITEmployer wordt eruit gehaald door middel van de onderstaande regel, deze error is irrelevant nu VacITEmployer hierboven in het object wordt gezet
@@ -89,7 +89,7 @@ namespace VacIT.Controllers
         [Authorize(Roles = "Employer")]
         public IActionResult NieuweVacature(JobOffer jobOffer)
         {
-            _vacITPageModel.SetCurrentEmployer();
+            _vacITPageModel.GetCurrentEmployer();
             jobOffer.VacITEmployer = _vacITPageModel._vacITEmployer;
 
             //De error omtrent de VacITEmployer wordt eruit gehaald door middel van de onderstaande regel, deze error is irrelevant nu VacITEmployer hierboven in het object wordt gezet
@@ -106,6 +106,21 @@ namespace VacIT.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Employer, Candidate")]
+        public IActionResult Sollicitatie(int id)
+        {
+            _vacITPageModel.GetCandidateApplication(id);
+            return View(_vacITPageModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employer")]
+        public IActionResult Sollicitatie(int id, bool invited)
+        {
+            _vacITPageModel.ChangeInvitedStatus(id, invited);
+            return View(_vacITPageModel);
         }
 
         public IActionResult Vacature(int id)

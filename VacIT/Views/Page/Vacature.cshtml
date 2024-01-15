@@ -6,7 +6,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
-    <table>
+    <table class="table">
         <tr>
             <th>Naam</th>
             <td>@Model._jobOffer.Name</td>
@@ -40,4 +40,7 @@
             <td>@Model._jobOffer.VacITEmployer.Name</td>
         </tr>
     </table>
+    <div>
+        <a asp-controller="Page" asp-action="MijnVacatures">Terug</a>
+    </div>
 </div>
